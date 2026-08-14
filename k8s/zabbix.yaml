@@ -28,7 +28,7 @@ spec:
             - name: ZBX_SERVER_HOST
               value: zabbix-server   # endereço do Zabbix Server central
             - name: ZBX_HOSTNAME
-              value: zabbix-proxy     # nome único do proxy
+              value: zabbix-proxy     # nome único do proxy            
           ports:
             - containerPort: 10051
           volumeMounts:
