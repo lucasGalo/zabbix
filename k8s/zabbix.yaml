@@ -28,9 +28,7 @@ spec:
             - name: ZBX_SERVER_HOST
               value: zabbix-server
             - name: ZBX_HOSTNAME
-              value: zabbix-proxy     # nome único do proxy            
-          ports:
-            - containerPort: 10051
+              value: zabbix-proxy
           volumeMounts:
             - name: zabbix-proxy-data
               mountPath: /var/lib/zabbix
@@ -50,16 +48,3 @@ spec:
   resources:
     requests:
       storage: 2Gi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: zabbix-proxy
-  namespace: argocd
-spec:
-  selector:
-    app: zabbix-proxy
-  ports:
-    - port: 10051
-      targetPort: 10051
-  type: ClusterIP

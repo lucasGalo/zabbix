@@ -26,7 +26,7 @@ spec:
             - name: MYSQL_DATABASE
               value: zabbix
             - name: ZBX_SERVER_HOST
-              value: zabbix-server
+              value: zabbix-server   # aponta para o Service do Server
           ports:
             - containerPort: 8080
 ---
@@ -39,7 +39,7 @@ spec:
   selector:
     app: zabbix-frontend
   ports:
-    - port: 7777        # Porta externa que você quer usar
-      targetPort: 8080  # Porta interna do container (onde o frontend escuta)
-      nodePort: 30777   # Porta NodePort fixa para acesso externo
+    - port: 7777
+      targetPort: 8080
+      nodePort: 30777
   type: NodePort
