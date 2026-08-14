@@ -1,57 +1,66 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: zabbix-server
+  name: zabbix-proxy
+  namespace: argocd
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: zabbix-server
+      app: zabbix-proxy
   template:
     metadata:
       labels:
-        app: zabbix-server
+        app: zabbix-proxy
     spec:
       containers:
-        - name: zabbix-server
-          image: zabbix/zabbix-server-mysql:7.4-ubuntu-latest
+        - name: zabbix-proxy
+          image: zabbix/zabbix-proxy-pgsql:ubuntu-7.4-latest
           env:
             - name: DB_SERVER_HOST
-              value: zabbix-mysql
-            - name: MYSQL_USER
+              value: zabbix-postgres
+            - name: POSTGRES_USER
               value: zabbix
-            - name: MYSQL_PASSWORD
+            - name: POSTGRES_PASSWORD
               value: zabbix_pass
-            - name: MYSQL_DATABASE
+            - name: POSTGRES_DB
               value: zabbix
+            - name: ZBX_SERVER_HOST
+              value: zabbix-server   # endereço do Zabbix Server central
+            - name: ZBX_HOSTNAME
+              value: zabbix-proxy     # nome único do proxy
           ports:
             - containerPort: 10051
           volumeMounts:
-            - name: zabbix-data
+            - name: zabbix-proxy-data
               mountPath: /var/lib/zabbix
       volumes:
-        - name: zabbix-data
+        - name: zabbix-proxy-data
           persistentVolumeClaim:
-            claimName: zabbix-data-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: zabbix-server
-spec:
-  selector:
-    app: zabbix-server
-  ports:
-    - port: 10051
-      targetPort: 10051
+            claimName: zabbix-proxy-data-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: zabbix-data-pvc
+  name: zabbix-proxy-data-pvc
+  namespace: argocd
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zabbix-proxy
+  namespace: argocd
+spec:
+  selector:
+    app: zabbix-proxy
+  ports:
+    - port: 10051
+      targetPort: 10051
+      nodePort: 30451
+  type: NodePort
