@@ -60,6 +60,6 @@ spec:
   selector:
     app: zabbix-proxy
   ports:
-    - port: 10050
-      targetPort: 10050
+    - port: 10051
+      targetPort: 10051
   type: ClusterIP
