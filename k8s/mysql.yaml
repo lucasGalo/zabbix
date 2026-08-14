@@ -24,6 +24,12 @@ spec:
               value: zabbix
             - name: MYSQL_PASSWORD
               value: zabbix_pass
+            - name: MYSQL_INITDB_SKIP_TZINFO
+              value: "1"
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "no"
+            - name: MYSQL_LOG_BIN_TRUST_FUNCTION_CREATORS
+              value: "1"
           ports:
             - containerPort: 3306
           volumeMounts:
