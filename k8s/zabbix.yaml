@@ -25,8 +25,8 @@ spec:
               value: zabbix_pass
             - name: MYSQL_DATABASE
               value: zabbix_proxy
-            #- name: ZBX_SERVER_HOST
-            #  value: zabbix-server   # endereço do Zabbix Server central
+            - name: ZBX_SERVER_HOST
+              value: zabbix-server   # endereço do Zabbix Server central
             - name: ZBX_HOSTNAME
               value: zabbix-proxy     # nome único do proxy            
           ports:
