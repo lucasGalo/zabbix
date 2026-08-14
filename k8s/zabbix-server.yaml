@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: zabbix-server
-          image: zabbix/zabbix-server-mysql:7.4.13-ubuntu
+          image: zabbix/zabbix-server-mysql:7.0.29-ubuntu
           env:
             - name: DB_SERVER_HOST
               value: zabbix-mysql
