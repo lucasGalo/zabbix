@@ -25,8 +25,6 @@ spec:
               value: zabbix_pass
             - name: MYSQL_DATABASE
               value: zabbix
-            - name: ZBX_HOSTNAME
-              value: zabbix-server
           ports:
             - containerPort: 10051
 ---
@@ -41,5 +39,4 @@ spec:
   ports:
     - port: 10051
       targetPort: 10051
-      nodePort: 30452
-  type: NodePort
+  type: ClusterIP
