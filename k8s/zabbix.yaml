@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: zabbix-proxy
-          image: zabbix/zabbix-proxy-pgsql:ubuntu-7.4-latest
+          image: zabbix/zabbix-proxy-pgsql:7.4.13-ubuntu
           env:
             - name: DB_SERVER_HOST
               value: zabbix-postgres
