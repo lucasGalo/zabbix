@@ -15,15 +15,15 @@ spec:
     spec:
       containers:
         - name: zabbix-proxy
-          image: zabbix/zabbix-proxy-pgsql:7.4.13-ubuntu
+          image: zabbix/zabbix-proxy-mysql:7.4.13-ubuntu
           env:
             - name: DB_SERVER_HOST
-              value: zabbix-postgres
-            - name: POSTGRES_USER
+              value: zabbix-mysql
+            - name: MYSQL_USER
               value: zabbix
-            - name: POSTGRES_PASSWORD
+            - name: MYSQL_PASSWORD
               value: zabbix_pass
-            - name: POSTGRES_DB
+            - name: MYSQL_DATABASE
               value: zabbix
             - name: ZBX_SERVER_HOST
               value: zabbix-server   # endereço do Zabbix Server central
