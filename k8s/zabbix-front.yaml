@@ -28,7 +28,7 @@ spec:
             - name: ZBX_SERVER_HOST
               value: zabbix-server
           ports:
-            - containerPort: 7777
+            - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -40,6 +40,6 @@ spec:
     app: zabbix-frontend
   ports:
     - port: 7777        # Porta externa que você quer usar
-      targetPort: 7777  # Porta interna do container (onde o frontend escuta)
+      targetPort: 8080  # Porta interna do container (onde o frontend escuta)
       nodePort: 30777   # Porta NodePort fixa para acesso externo
   type: NodePort
