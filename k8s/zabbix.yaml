@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: zabbix-server
-          image: zabbix/zabbix-server-mysql:latest
+          image: zabbix/zabbix-server-mysql:7.4
           env:
             - name: DB_SERVER_HOST
               value: zabbix-mysql
